@@ -2,6 +2,7 @@ define(function(require, exports, module) {
 
 var marionette = require('marionette');
 var modals = require('built/app/modals');
+var keys = require('built/app/keys');
 
 var templateSample = require('hbs!app/sample/templates/sample');
 var templateModal = require('hbs!app/sample/templates/modal');
@@ -29,6 +30,12 @@ var MyModalView = marionette.ItemView.extend({
 
     wantsCloseModal: function(){
         this.trigger(modals.events.COMPLETE);
+    },
+
+    keyDown: function(e){
+        if(e.keyCode == 27) {
+            this.trigger(modals.events.COMPLETE);
+        }
     }
 });
 

@@ -9,63 +9,42 @@ var activity = require('built/app/activity');
 var keys = require('built/app/keys');
 var app = require('app/app');
 
-
-var MySampleView        = require('app/sample/views').MySampleView;
-var MyModalView         = require('app/sample/views').MyModalView;
-
-
+var TodoLayoutView = require('app/todos/views/layout').TodoLayoutView;
 
 var AppController = marionette.Controller.extend({
 
     initialize: function(options){
-        // This call is required to initialize the
-        // BUILT App foundation. See below for what's done.
-        // You can customize that as necessary.
         this.BUILT();
         this.app = app;
     },
 
     index: function(){
-        
-
-        /* Ready. Set. Go! */
-        // Your Application's Regions are set in the app/app.js
-        // everything else starts here. (or in another route :)
-
-
-        var model = new backbone.Model({
-            message: 'Build something! Press Shift + M to display a Modal'
-        });
-
-        this.app.window.show(new MySampleView({model: model}));
-        /* ---------- */
-        
+        this.app.window.show(new TodoLayoutView());
     },
-    
+
     // Demo of handling Key Presses
     // Combined with Modal Handling
-    keyDown: function(e){
-        var key = keys.getKeyFromEvent(e);
+    // keyDown: function(e){
+    //     var key = keys.getKeyFromEvent(e);
+    //     if(key == 'M' && // shift + M
+    //        !this.app.modal.currentView){
 
-        if(key == 'M' && // shift + M
-           !this.app.modal.currentView){
+    //         var complete = function(modalView){
+    //             // Data from the modal:
+    //             console.log(modalView.getData());
 
-            var complete = function(modalView){
-                // Data from the modal:
-                console.log(modalView.getData());
+    //             // You are responsible for dismissing the modal.
+    //             modals.dismissModal();
+    //         };
 
-                // You are responsible for dismissing the modal.
-                modals.dismissModal();
-            };
+    //         // Present a modal view.
+    //         modals.presentModal(new templates.MyModalView())
+    //               .then(complete);
 
-            // Present a modal view.
-            modals.presentModal(new MyModalView())
-                  .then(complete);
+    //         return true;
+    //     }
+    // },
 
-            return true;
-        }
-    },
-    
     BUILT: function(){
 
         // Key Management
