@@ -22,7 +22,7 @@ var ListCompositeView = marionette.CompositeView.extend({
         'click #toggle-all': 'onToggleAllClick'
     },
 
-    initialize: function () {
+    initialize: function (options) {
         this.listenTo(this.collection, 'all', this.updateToggleCheckbox, this);
     },
 

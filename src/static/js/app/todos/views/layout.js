@@ -4,13 +4,13 @@ var backbone = require('backbone');
 var marionette = require('marionette');
 var template = require('hbs!../templates/todolayout');
 
-var todoList = require('../collections/todolist').TodoList;
+var TodoList = require('../collections/todolist').TodoList;
 
 var HeaderView = require('../views/header').HeaderView;
 var FooterView = require('../views/footer').FooterView;
 var ListCompositeView = require('../views/listcomposite').ListCompositeView;
 
-var TodoLayoutView = marionette.Layout.extend({
+var LayoutView = marionette.Layout.extend({
 
     template : template,
     regions: {
@@ -21,22 +21,23 @@ var TodoLayoutView = marionette.Layout.extend({
 
 });
 
-var viewOptions = {
+todoList = new TodoList();
+
+viewOptions = {
     collection: todoList
 };
+
+var layoutView = new LayoutView();
 
 var header = new HeaderView(viewOptions);
 var footer = new FooterView(viewOptions);
 var main = new ListCompositeView(viewOptions);
 
-TodoLayoutView.addInitializer(function () {
-    TodoLayoutView.header.show(header);
-    TodoLayoutView.main.show(main);
-    TodoLayoutView.footer.show(footer);
+layoutView.header.show(header);
+layoutView.main.show(main);
+layoutView.footer.show(footer);
+todoList.fetch();
 
-    todoList.fetch();
-});
-
-exports.TodoLayoutView = TodoLayoutView;
+exports.LayoutView = LayoutView;
 
 });
