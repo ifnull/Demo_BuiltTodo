@@ -4,8 +4,8 @@ var backbone = require('backbone');
 var marionette = require('marionette');
 var template = require('hbs!../templates/footer');
 
-var ActiveCountView = require('./activecount').ActiveCountView;
-var CompletedCountView = require('./completedcount').CompletedCountView;
+var ActiveCountView = require('./active-count-view').ActiveCountView;
+var CompletedCountView = require('./completed-count-view').CompletedCountView;
 
 var FooterView = marionette.Layout.extend({
 

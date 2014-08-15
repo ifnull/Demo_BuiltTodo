@@ -4,7 +4,7 @@ var backbone = require('backbone');
 var marionette = require('marionette');
 var Todo = require('../models/todo').Todo;
 
-var TodoList  =  backbone.Collection.extend({
+var Todos  =  backbone.Collection.extend({
     model: Todo,
 
     localStorage: new backbone.LocalStorage('todos-backbone'),
@@ -20,6 +20,6 @@ var TodoList  =  backbone.Collection.extend({
     comparator: 'created'
 });
 
-exports.TodoList = TodoList;
+exports.Todos = Todos;
 
 });

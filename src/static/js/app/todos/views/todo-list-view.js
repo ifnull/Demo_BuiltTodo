@@ -2,15 +2,15 @@ define(function (require, exports, module) {
 
 var backbone = require('backbone');
 var marionette = require('marionette');
-var template = require('hbs!../templates/listcomposite');
+var template = require('hbs!../templates/todo-list');
 
-var ItemView = require('./item').ItemView;
+var TodoItemView = require('./todo-item-view').TodoItemView;
 
-var ListCompositeView = marionette.CompositeView.extend({
+var TodoListView = marionette.CompositeView.extend({
 
     template: template,
 
-    itemView: ItemView,
+    itemView: TodoItemView,
 
     itemViewContainer: '#todo-list',
 
@@ -23,7 +23,12 @@ var ListCompositeView = marionette.CompositeView.extend({
     },
 
     initialize: function (options) {
-        this.listenTo(this.collection, 'all', this.updateToggleCheckbox, this);
+        debugger;
+        this.listenTo(
+            this.collection,
+            'all',
+            this.updateToggleCheckbox,
+            this);
     },
 
     onRender: function () {
@@ -48,6 +53,6 @@ var ListCompositeView = marionette.CompositeView.extend({
 
 });
 
-exports.ListCompositeView = ListCompositeView;
+exports.TodoListView = TodoListView;
 
 });

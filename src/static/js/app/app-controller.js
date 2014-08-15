@@ -9,7 +9,7 @@ var activity = require('built/app/activity');
 var keys = require('built/app/keys');
 var app = require('app/app');
 
-var LayoutView = require('app/todos/views/layout').LayoutView;
+var TodoLayoutView = require('app/todos/views/todo-layout-view').TodoLayoutView;
 
 var AppController = marionette.Controller.extend({
 
@@ -19,11 +19,7 @@ var AppController = marionette.Controller.extend({
     },
 
     index: function(){
-        this.app.window.show(new LayoutView());
-    },
-
-    active: function(){
-        this.app.window.show(new LayoutView());
+        this.app.window.show(new TodoLayoutView());
     },
 
     // Demo of handling Key Presses

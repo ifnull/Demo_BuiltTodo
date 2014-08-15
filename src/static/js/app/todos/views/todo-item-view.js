@@ -2,12 +2,12 @@ define(function (require, exports, module) {
 
 var backbone = require('backbone');
 var marionette = require('marionette');
-var template = require('hbs!../templates/item');
+var template = require('hbs!../templates/todo-item');
 
 var ENTER_KEY = 13;
 var ESCAPE_KEY = 27;
 
-var ItemView = marionette.CompositeView.extend({
+var TodoItemView = marionette.CompositeView.extend({
 
     tagName: 'li',
 
@@ -82,6 +82,6 @@ var ItemView = marionette.CompositeView.extend({
 
 });
 
-exports.ItemView = ItemView;
+exports.TodoItemView = TodoItemView;
 
 });
