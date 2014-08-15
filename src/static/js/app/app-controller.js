@@ -19,8 +19,11 @@ var AppController = marionette.Controller.extend({
     },
 
     index: function(){
-        layoutView = new LayoutView();
-        this.app.window.show(layoutView);
+        this.app.window.show(new LayoutView());
+    },
+
+    active: function(){
+        this.app.window.show(new LayoutView());
     },
 
     // Demo of handling Key Presses

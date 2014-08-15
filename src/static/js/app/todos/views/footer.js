@@ -37,7 +37,9 @@ var FooterView = marionette.Layout.extend({
     },
 
     onClearClick: function () {
-        window.app.vent.trigger('todoList:clear:completed');
+        this.collection.getCompleted().forEach(function (todo) {
+            todo.destroy();
+        });
     }
 
 });
