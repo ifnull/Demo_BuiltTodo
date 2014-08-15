@@ -24,7 +24,7 @@ var FooterView = marionette.Layout.extend({
         'click #clear-completed' : 'onClearClick'
     },
 
-    onRender: function () {
+    onShow: function () {
         this.activeCount.show(new ActiveCountView({ collection: this.collection }));
         this.completedCount.show(new CompletedCountView({ collection: this.collection }));
     },

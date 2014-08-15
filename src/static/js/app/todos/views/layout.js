@@ -17,26 +17,26 @@ var LayoutView = marionette.Layout.extend({
         header: '#header',
         main: '#main',
         footer: '#footer'
+    },
+
+    initialize: function(options){
+        this.todoList = new TodoList();
+    },
+
+    onShow: function() {
+        var viewOptions = {
+            collection: this.todoList
+        };
+
+        this.header.show(new HeaderView(viewOptions));
+        this.main.show(new FooterView(viewOptions));
+        this.footer.show(new ListCompositeView(viewOptions));
+        
+        this.todoList.fetch();
     }
 
 });
 
-todoList = new TodoList();
-
-viewOptions = {
-    collection: todoList
-};
-
-var layoutView = new LayoutView();
-
-var header = new HeaderView(viewOptions);
-var footer = new FooterView(viewOptions);
-var main = new ListCompositeView(viewOptions);
-
-layoutView.header.show(header);
-layoutView.main.show(main);
-layoutView.footer.show(footer);
-todoList.fetch();
 
 exports.LayoutView = LayoutView;
 
