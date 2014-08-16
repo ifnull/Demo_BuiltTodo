@@ -18,9 +18,29 @@ var AppController = marionette.Controller.extend({
         this.app = app;
     },
 
-    index: function(){
-        this.app.window.show(new TodoLayoutView());
+    index: function(filter){
+        this.todoLayoutView = new TodoLayoutView({filter: filter});
+        this.app.window.show(this.todoLayoutView);
+
+        // debugger;
+        // if(typeof filter !== 'undefined'){
+        //     this.todoLayoutView.footer.updateFilterSelection(filter);
+        //     document.getElementById('todoapp').className = 'filter-' + (filter === '' ? 'all' : filter);
+        // } else {
+        //     this.todoLayoutView.main.$el.toggle(todoList.length > 0);
+        //     this.todoLayoutView.footer.$el.toggle(todoList.length > 0);
+        // }
+
     },
+
+    // completed: function(){
+    //     debugger;
+    // },
+
+    // active: function(){
+    //     debugger;
+    // },
+
 
     // Demo of handling Key Presses
     // Combined with Modal Handling

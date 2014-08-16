@@ -23,7 +23,6 @@ var TodoListView = marionette.CompositeView.extend({
     },
 
     initialize: function (options) {
-        debugger;
         this.listenTo(
             this.collection,
             'all',

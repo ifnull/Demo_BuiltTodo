@@ -4,8 +4,7 @@ var backbone = require('backbone');
 var marionette = require('marionette');
 var template = require('hbs!../templates/todo-item');
 
-var ENTER_KEY = 13;
-var ESCAPE_KEY = 27;
+var KeyResponder = require('built/core/responders/keys').KeyResponder;
 
 var TodoItemView = marionette.CompositeView.extend({
 
@@ -29,8 +28,21 @@ var TodoItemView = marionette.CompositeView.extend({
 
     initialize: function () {
       this.value = this.model.get('title');
-
       this.listenTo(this.model, 'change', this.render, this);
+      this.keyNavigation = new KeyResponder({
+          el: this.$el,
+          insertNewline: this._keyNavigationReturn,
+          cancelOperation: this._keyNavigationEscape,
+       });
+    },
+
+    _keyNavigationReturn: function(e) {
+        this.ui.edit.trigger('blur');
+    },
+
+    _keyNavigationEscape: function(e) {
+        this.ui.edit.val(this.model.get('title'));
+        this.ui.edit.trigger('blur');
     },
 
     onRender: function () {
@@ -53,19 +65,7 @@ var TodoItemView = marionette.CompositeView.extend({
 
     onEditDblclick: function () {
       this.toggleEditingMode();
-
       this.ui.edit.focus().val(this.value);
-    },
-
-    onEditKeyDown: function (event) {
-      if (event.which === ENTER_KEY) {
-        this.ui.edit.trigger('blur');
-      }
-
-      if (event.which === ESCAPE_KEY) {
-        this.ui.edit.val(this.model.get('title'));
-        this.ui.edit.trigger('blur');
-      }
     },
 
     onEditBlur: function (event) {

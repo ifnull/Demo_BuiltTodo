@@ -30,7 +30,8 @@ var FooterView = marionette.Layout.extend({
     },
 
     updateFilterSelection: function (filter) {
-        this.ui.filters
+        debugger;
+        $(this.ui.filters)
             .removeClass('selected')
             .filter('[href="#/' + filter + '"]')
             .addClass('selected');
