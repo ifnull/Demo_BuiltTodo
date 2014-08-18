@@ -4,6 +4,8 @@ var backbone = require('backbone');
 var marionette = require('marionette');
 var template = require('hbs!../templates/header');
 
+var KeyResponder = require('built/core/responders/keys').KeyResponder;
+
 var HeaderView = marionette.ItemView.extend({
 
     template: template,
@@ -12,22 +14,29 @@ var HeaderView = marionette.ItemView.extend({
         input: '#new-todo'
     },
 
-    events: {
-        'keypress #new-todo': 'onInputKeypress'
+    initialize: function () {
+      this.keyNavigation = new KeyResponder({
+          el: this.$el,
+          ref: this,
+          insertNewline: this._keyNavigationReturn,
+          cancelOperation: this._keyNavigationEscape,
+       });
     },
 
-    onInputKeypress: function (event) {
-        var ENTER_KEY = 13;
-        var todoText = this.ui.input.val().trim();
-
-        if (event.which === ENTER_KEY && todoText) {
-            this.collection.create({
+    _keyNavigationReturn: function(c,e) {
+        var todoText = c.ref.ui.input.val().trim();
+        if (todoText) {
+            c.ref.collection.create({
                 title: todoText
             });
 
-            this.ui.input.val('');
+            c.ref.ui.input.val('');
         }
-    }
+    },
+
+    _keyNavigationEscape: function(c,e) {
+        c.ref.ui.input.val('');
+    },
 
 });
 

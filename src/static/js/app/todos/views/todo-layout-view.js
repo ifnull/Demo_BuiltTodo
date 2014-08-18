@@ -20,6 +20,7 @@ var TodoLayoutView = marionette.Layout.extend({
     },
 
     initialize: function(filter){
+
         this.todos = new Todos();
 
         if (filter.filter !== null) {
@@ -35,6 +36,7 @@ var TodoLayoutView = marionette.Layout.extend({
     },
 
     onShow: function() {
+
         var viewOptions = {
             collection: this.todos,
             filter: this.filter
@@ -43,7 +45,6 @@ var TodoLayoutView = marionette.Layout.extend({
         var headerView = new HeaderView(viewOptions);
         var todoListView = new TodoListView(viewOptions);
         var footerView = new FooterView(viewOptions);
-
 
         this.header.show(headerView);
         this.main.show(todoListView);
