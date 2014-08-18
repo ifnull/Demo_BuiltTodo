@@ -21,90 +21,17 @@ var AppController = marionette.Controller.extend({
     index: function(filter){
         this.todoLayoutView = new TodoLayoutView({filter: filter});
         this.app.window.show(this.todoLayoutView);
-        // debugger;
-        // if(typeof filter !== 'undefined'){
-        //     this.todoLayoutView.footer.updateFilterSelection(filter);
-        //     document.getElementById('todoapp').className = 'filter-' + (filter === '' ? 'all' : filter);
-        // } else {
-        //     this.todoLayoutView.main.$el.toggle(todoList.length > 0);
-        //     this.todoLayoutView.footer.$el.toggle(todoList.length > 0);
-        // }
-
     },
-
-    // completed: function(){
-    //     debugger;
-    // },
-
-    // active: function(){
-    //     debugger;
-    // },
-
-
-    // Demo of handling Key Presses
-    // Combined with Modal Handling
-    // keyDown: function(e){
-    //     var key = keys.getKeyFromEvent(e);
-    //     if(key == 'M' && // shift + M
-    //        !this.app.modal.currentView){
-
-    //         var complete = function(modalView){
-    //             // Data from the modal:
-    //             console.log(modalView.getData());
-
-    //             // You are responsible for dismissing the modal.
-    //             modals.dismissModal();
-    //         };
-
-    //         // Present a modal view.
-    //         modals.presentModal(new templates.MyModalView())
-    //               .then(complete);
-
-    //         return true;
-    //     }
-    // },
 
     BUILT: function(){
 
-        // Key Management
-        // If you are not using the modal system,
-        // but are using the key system, you can omit
-        // the dictionary passed here.
         keys.initialize({modals: modals});
 
-        // The responder chain is a stack of views/controllers.
-        // When a key event is detected, the stack is searched
-        // from the bottom up. AKA Last in First Out (LIFO).
-        // Views that participate in the chain can choose to implement
-        // keyDown(e) or performKeyEquivalent(e).
-        //
-        // performKeyEquivalent is checked first then keyDown is checked.
-        // If either of those returns 'true' the chain is no longer traversed.
-        //
-        // Note that we automatically add the ApplicationDelegate.
-        // This ensures it will be the last one checked for key events.
-        // Then we implement keyDown above to handle looking for
-        // our desired key press.
-        //
-        // Any additional view or controller that would like
-        // to participate in this chain is required to register
-        // itself into the chain like we do here.
         keys.registerInResponderChain(this);
 
-        // Modal Management
-        // These handlers are present so you can define how the modal is
-        // shown. AKA via animation, or some other means.
-        //
-        // You should NEVER call these directly.
         this.listenTo(vent, modals.events.PRESENT, this._presentModal);
         this.listenTo(vent, modals.events.DISMISS, this._dismissModal);
 
-        // Activity Management
-        // Like modal managerment, these handlers are present so you can define
-        // how the network activity indicator is presented. AKA via animation
-        // or some other means.
-        //
-        // You should NEVER call these directly.
         this.listenTo(vent, activity.events.PRESENT, this._presentNetworkActivityIndicator);
         this.listenTo(vent, activity.events.DISMISS, this._dismissNetworkActivityIndicator);
     },
@@ -124,10 +51,6 @@ var AppController = marionette.Controller.extend({
 
     _dismissModal: function(modalView){
         this.app.modal.close();
-
-        // This is VERY important!
-        // You MUST call this after your
-        // modal has been dismissed.
         modals.nextModal();
     }
 });
