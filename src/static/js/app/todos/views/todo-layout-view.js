@@ -21,7 +21,17 @@ var TodoLayoutView = marionette.Layout.extend({
 
     initialize: function(filter){
         this.todos = new Todos();
-        this.filter = filter.filter;
+
+        if (filter.filter !== null) {
+            this.filter = filter.filter;
+        } else {
+            this.filter = 'all';
+        }
+
+        this.listenTo(this.todos, 'all', function () {
+            this.main.$el.toggle(this.todos.length > 0);
+            this.footer.$el.toggle(this.todos.length > 0);
+        });
     },
 
     onShow: function() {
@@ -34,13 +44,16 @@ var TodoLayoutView = marionette.Layout.extend({
         var todoListView = new TodoListView(viewOptions);
         var footerView = new FooterView(viewOptions);
 
+
         this.header.show(headerView);
         this.main.show(todoListView);
         this.footer.show(footerView);
 
         if(typeof this.filter !== 'undefined'){
             footerView.updateFilterSelection(this.filter);
-            // document.getElementById('todoapp').className = 'filter-' + (filter === '' ? 'all' : filter);
+            this.$el.find('#todoapp')
+                .removeClass()
+                .addClass('filter-' + (this.filter === '' ? 'all' : this.filter));
         } else {
             todoListView.$el.toggle(this.todos.length > 0);
             footerView.$el.toggle(this.todos.length > 0);

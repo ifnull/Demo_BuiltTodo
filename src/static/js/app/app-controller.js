@@ -21,7 +21,6 @@ var AppController = marionette.Controller.extend({
     index: function(filter){
         this.todoLayoutView = new TodoLayoutView({filter: filter});
         this.app.window.show(this.todoLayoutView);
-
         // debugger;
         // if(typeof filter !== 'undefined'){
         //     this.todoLayoutView.footer.updateFilterSelection(filter);

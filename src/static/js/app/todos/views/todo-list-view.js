@@ -38,7 +38,6 @@ var TodoListView = marionette.CompositeView.extend({
         var allCompleted = this.collection.reduce(function (lastModel, thisModel) {
             return lastModel && thisModel.get('completed');
         }, true);
-
         this.ui.toggle.prop('checked', allCompleted);
     },
 
