@@ -31,19 +31,20 @@ var TodoItemView = marionette.CompositeView.extend({
       this.listenTo(this.model, 'change', this.render, this);
       this.keyNavigation = new KeyResponder({
           el: this.$el,
-          ref: this,
+          todoItemView: this,
           insertNewline: this._keyNavigationReturn,
           cancelOperation: this._keyNavigationEscape,
        });
     },
 
-    _keyNavigationReturn: function(c,e) {
-        c.ref.ui.edit.trigger('blur');
+    _keyNavigationReturn: function(callback, event) {
+        callback.todoItemView.ui.edit.trigger('blur');
     },
 
-    _keyNavigationEscape: function(c,e) {
-        c.ref.ui.edit.val(c.ref.model.get('title'));
-        c.ref.ui.edit.trigger('blur');
+    _keyNavigationEscape: function(callback, event) {
+        callback.todoItemView.ui.edit.val(
+          callback.todoItemView.model.get('title'));
+        callback.todoItemView.ui.edit.trigger('blur');
     },
 
     onRender: function () {

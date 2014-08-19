@@ -17,25 +17,25 @@ var HeaderView = marionette.ItemView.extend({
     initialize: function () {
       this.keyNavigation = new KeyResponder({
           el: this.$el,
-          ref: this,
+          headerView: this,
           insertNewline: this._keyNavigationReturn,
           cancelOperation: this._keyNavigationEscape,
        });
     },
 
-    _keyNavigationReturn: function(c,e) {
-        var todoText = c.ref.ui.input.val().trim();
+    _keyNavigationReturn: function(callback, event) {
+        var todoText = callback.headerView.ui.input.val().trim();
         if (todoText) {
-            c.ref.collection.create({
+            callback.headerView.collection.create({
                 title: todoText
             });
 
-            c.ref.ui.input.val('');
+            callback.headerView.ui.input.val('');
         }
     },
 
-    _keyNavigationEscape: function(c,e) {
-        c.ref.ui.input.val('');
+    _keyNavigationEscape: function(callback, event) {
+        callback.headerView.ui.input.val('');
     },
 
 });
