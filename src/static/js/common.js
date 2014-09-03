@@ -65,7 +65,6 @@ require.config({
 
     'backbone/localstorage' : {
       'deps' : ['backbone'],
-      'exports' : 'LocalStorage'
     },
 
     'backbone/stickit' : {

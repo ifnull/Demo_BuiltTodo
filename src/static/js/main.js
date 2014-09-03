@@ -7,7 +7,6 @@ var renderer = require('app/renderer');
 var app = require('app/app');
 var AppRouter = require('app/app-router').AppRouter;
 require('backbone/stickit');
-require('backbone/localstorage');
 
 app.appRouter = new AppRouter();
 app.start();

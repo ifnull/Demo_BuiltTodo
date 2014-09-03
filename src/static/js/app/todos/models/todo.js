@@ -4,8 +4,6 @@ var backbone = require('backbone');
 
 var Todo = backbone.Model.extend({
 
-    localStorage: new backbone.LocalStorage('todos-backbone'),
-
     defaults: {
         title: '',
         completed: false,
